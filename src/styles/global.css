@@ -15,7 +15,7 @@
      Rule: orange and yellow never sit on each other as text (1.6:1). */
   --paper:            #0a0a0a;   /* the black */
   --ink:              #f3ece0;   /* warm white, 16.9:1: body text */
-  --ink-muted:        #b5aca0;   /* 8.8:1: dates, captions, secondary text */
+  --ink-muted:        #c8a27a;   /* 8.4:1: graham-cracker brown for dates, captions, secondary text */
   --highlight-orange: #ff8c42;   /* 8.6:1: headings, links, the warm highlight */
   --highlight-yellow: #ffd166;   /* 13.7:1: the brighter highlight, emphasis */
   --accent-purple:    #b8a9e0;   /* 9.2:1: the purple when it must be read as text */
