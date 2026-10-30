@@ -1,0 +1,18 @@
+// Cloudflare Worker settings for the site (Gianni's personal Cloudflare account).
+// Production (every push to main) and branch previews both read this.
+// `name` MUST stay "my-website": that is the Worker the domain is attached
+// to. A different name would deploy a second, separate Worker.
+{
+  "name": "my-website",
+  "compatibility_date": "2026-10-30",
+
+  // Static files only, no server code. Astro writes the finished pages to
+  // dist/ and Cloudflare serves them from its edge.
+  "assets": {
+    "directory": "./dist"
+  },
+
+  // Required (even empty) for branch previews, which get their own
+  // *.workers.dev address.
+  "previews": {}
+}

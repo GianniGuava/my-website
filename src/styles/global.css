@@ -1,0 +1,70 @@
+/* ═══════════════════════════════════════════════════════════
+   giancarloguevarra.com: the blank page.
+   This file holds only what accessibility needs. The visual design
+   is Gianni's, and comes after. Repaint the tokens freely; every
+   text colour below clears WCAG 2.2 AAA (7:1) on its paper.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Light scheme (ratios on --paper): ink 18.9:1, muted 7.5:1 */
+  --paper:     #ffffff;
+  --ink:       #111111;
+  --ink-muted: #555555;
+  --rule:      #767676;   /* borders, 4.5:1 (non-text needs 3:1) */
+  --focus:     var(--ink);
+
+  --measure: 65ch;        /* comfortable line length for reading */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark scheme (ratios on --paper): ink 17.1:1, muted 8.1:1 */
+    --paper:     #0f0f0f;
+    --ink:       #f2f2f2;
+    --ink-muted: #a8a8a8;
+    --rule:      #8c8c8c;
+  }
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+body { margin: 0; }
+main { max-width: var(--measure); margin: 0 auto; padding: 1.5rem; }
+
+/* Links are always underlined, so colour is never the only cue (1.4.1). */
+a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* ── Keyboard focus, visible on every scheme (2.4.7, 2.4.11) ── */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ── Skip link: first tab stop, hidden until focused (2.4.1) ── */
+.skip-link {
+  position: absolute;
+  left: 0; top: 0;
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+/* ── Motion: nothing animates for people who asked for less (2.3.3) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
