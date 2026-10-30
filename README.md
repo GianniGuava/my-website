@@ -24,10 +24,12 @@ Giancarlo Guevarra's personal site. Astro, static files, served by Cloudflare.
 
 ## Accessibility baseline
 
-WCAG 2.2 Level AA throughout, AAA for colour contrast. The tokens in `global.css`
-state their ratios; keep any new text colour at 7:1 or better on its paper.
-Every page has a skip link, a visible focus ring, one `<h1>`, and respects
-`prefers-reduced-motion` and `prefers-color-scheme`.
+WCAG 2.2 Level AA throughout, AAA for colour contrast. The scheme is black with
+warm orange and yellow highlights and a soft purple shadow accent; the site is
+dark only. The tokens in `global.css` state their ratios; keep any new text
+colour at 7:1 or better on its paper, and never put orange and yellow on each
+other as text. Every page has a skip link, a visible focus ring, one `<h1>`,
+and respects `prefers-reduced-motion`.
 
 ## Performance check
 

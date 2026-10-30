@@ -1,31 +1,30 @@
 /* ═══════════════════════════════════════════════════════════
    giancarloguevarra.com: the blank page.
-   This file holds only what accessibility needs. The visual design
-   is Gianni's, and comes after. Repaint the tokens freely; every
-   text colour below clears WCAG 2.2 AAA (7:1) on its paper.
+   This file holds the colour scheme and what accessibility needs.
+   The scheme is Gianni's: black, warm orange and yellow highlights,
+   a soft purple accent like a shadow. Every text colour clears
+   WCAG 2.2 AAA (7:1) on its paper.
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  color-scheme: light dark;
+  /* Dark only: the design is black. Telling the browser so keeps form
+     controls and scrollbars matching. */
+  color-scheme: dark;
 
-  /* Light scheme (ratios on --paper): ink 18.9:1, muted 7.5:1 */
-  --paper:     #ffffff;
-  --ink:       #111111;
-  --ink-muted: #555555;
-  --rule:      #767676;   /* borders, 4.5:1 (non-text needs 3:1) */
-  --focus:     var(--ink);
+  /* Every ratio below is on --paper. Text colours clear WCAG 2.2 AAA (7:1).
+     Rule: orange and yellow never sit on each other as text (1.6:1). */
+  --paper:            #0a0a0a;   /* the black */
+  --ink:              #f3ece0;   /* warm white, 16.9:1: body text */
+  --ink-muted:        #b5aca0;   /* 8.8:1: dates, captions, secondary text */
+  --highlight-orange: #ff8c42;   /* 8.6:1: headings, links, the warm highlight */
+  --highlight-yellow: #ffd166;   /* 13.7:1: the brighter highlight, emphasis */
+  --accent-purple:    #b8a9e0;   /* 9.2:1: the purple when it must be read as text */
+  --accent-shadow:    #6b5b95;   /* 3.4:1: shadows, glows, rules. Decorative only,
+                                    never the sole carrier of meaning */
+  --rule:             var(--accent-shadow);
+  --focus:            var(--highlight-yellow);
 
   --measure: 65ch;        /* comfortable line length for reading */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark scheme (ratios on --paper): ink 17.1:1, muted 8.1:1 */
-    --paper:     #0f0f0f;
-    --ink:       #f2f2f2;
-    --ink-muted: #a8a8a8;
-    --rule:      #8c8c8c;
-  }
 }
 
 /* ── Base ─────────────────────────────────────────────────── */
@@ -39,8 +38,9 @@ html {
 body { margin: 0; }
 main { max-width: var(--measure); margin: 0 auto; padding: 1.5rem; }
 
-/* Links are always underlined, so colour is never the only cue (1.4.1). */
-a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
+/* Links are orange and always underlined, so colour is never the only cue (1.4.1). */
+a { color: var(--highlight-orange); text-decoration: underline; text-underline-offset: 0.15em; }
+h1, h2, h3 { color: var(--highlight-orange); }
 
 /* ── Keyboard focus, visible on every scheme (2.4.7, 2.4.11) ── */
 :focus-visible {

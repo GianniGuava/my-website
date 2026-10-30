@@ -8,8 +8,8 @@ dist/
 npm-debug.log*
 
 # Local Lighthouse reports (npx lighthouse http://localhost:4321/ --output=json --output-path=./baseline.json)
-/baseline.json
-/after.json
+/baseline*.json
+/after*.json
 
 # OS / editor junk
 .DS_Store
