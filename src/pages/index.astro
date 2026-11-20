@@ -4,18 +4,26 @@
 import Base from "../layouts/Base.astro";
 import { site } from "../config/site.js";
 import { getEntry } from "astro:content";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 
 // First link: the MD editor. Its address, code link and logo live in
 // src/content/projects/md-editor.md, not here.
 const md = await getEntry("projects", "md-editor");
-if (!md?.data.url) throw new Error("projects/md-editor.md needs a url");
+if (!md) throw new Error("src/content/projects/md-editor.md is missing");
+if (!md.data.url) throw new Error("projects/md-editor.md needs a url");
+// A mistyped logo path stops the build instead of showing an empty slot.
+if (md.data.logo && !existsSync(join(process.cwd(), "public", md.data.logo))) {
+  throw new Error(`projects/md-editor.md: logo ${md.data.logo} is not in public/`);
+}
 const mdHost = new URL(md.data.url).host;
 // On narrow screens the address may wrap, but only before a dot.
 const [hostFirst, ...hostRest] = mdHost.split(".");
 ---
 <Base>
-  <h1>{site.name}</h1>
+  <h1 class="site-name">{site.name}</h1>
 
+  {md.data.shown && (
   <ul class="links" role="list">
     <li class="link-card">
       <div class="link-row">
@@ -26,11 +34,12 @@ const [hostFirst, ...hostRest] = mdHost.split(".");
           <span>{hostFirst}{hostRest.map((part) => <Fragment><wbr />.{part}</Fragment>)}</span>
         </a>
         {md.data.repo && (
-          <a class="link-code" href={md.data.repo}>Code on GitHub</a>
+          <a class="link-code" href={md.data.repo}>Code on GitHub<span class="visually-hidden"> for {md.data.title}</span></a>
         )}
       </div>
       {md.data.tagline && <p class="link-tagline">{md.data.tagline}</p>}
       {md.data.tip && <p class="link-tip">{md.data.tip}</p>}
     </li>
   </ul>
+  )}
 </Base>

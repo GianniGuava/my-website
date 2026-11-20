@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    giancarloguevarra.com
-   This file holds the colour scheme and what accessibility needs.
+   This file holds the colour scheme, what accessibility needs, and
+   (for now) the front page's few layout rules.
    The scheme is Gianni's choice (2026-11-13): a palette inspired by
    GMK Avanguardia: near-black navy, violet, magenta, warm white.
    Every text colour clears WCAG 2.2 AAA (7:1) on its paper.
@@ -43,14 +44,15 @@ main { max-width: var(--measure); margin: 0 auto; padding: 1.5rem; }
 a { color: var(--highlight-violet); text-decoration: underline; text-underline-offset: 0.15em; }
 h1, h2, h3 { color: var(--highlight-violet); }
 
-/* ── Front page links ──────────────────────────────────────── */
-h1 {
+/* ── Front page ────────────────────────────────────────────── */
+.site-name {
   font-size: clamp(2rem, 6vw, 3rem);
   line-height: 1.15;
   margin: 2.5rem 0 2rem;
 }
 
 .links {
+  grid-template-columns: minmax(0, 1fr);   /* the card never grows wider than the page */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -83,13 +85,15 @@ h1 {
 }
 
 .link-main {
-  flex: 1 1 auto;            /* take the row, so the address is not squeezed */
+  flex: 0 1 auto;            /* only as wide as the logo and address, so the
+                                focus ring and click area hug them */
+  min-width: 0;              /* may shrink below the address's longest part */
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
   font-size: clamp(1.05rem, 4vw, 1.2rem);
   font-weight: 600;
-  overflow-wrap: break-word; /* last resort if one part of an address is too long */
+  overflow-wrap: anywhere;   /* last resort, with very large text: break inside a part */
 }
 
 .link-logo {
@@ -107,7 +111,7 @@ h1 {
 .link-code:hover { color: var(--accent-ice); }
 /* The underline sits on the address, not under the logo. */
 .link-main { text-decoration: none; }
-.link-main span { text-decoration: underline; text-underline-offset: 0.15em; }
+.link-main span { min-width: 0; text-decoration: underline; text-underline-offset: 0.15em; }
 .link-main:hover span { text-decoration-thickness: 2px; }
 
 /* ── Keyboard focus, visible on every scheme (2.4.7, 2.4.11) ── */
@@ -119,13 +123,23 @@ h1 {
 /* ── Skip link: first tab stop, hidden until focused (2.4.1) ── */
 .skip-link {
   position: absolute;
-  left: 0; top: 0;
+  left: 0.5rem; top: 0.5rem;   /* off the screen corner, so its whole focus ring shows */
   padding: 0.75rem 1rem;
   background: var(--paper);
   color: var(--ink);
   transform: translateY(-200%);
 }
 .skip-link:focus { transform: none; }
+
+/* ── Visually hidden, still read by screen readers ── */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
 /* ── Motion: nothing animates for people who asked for less (2.3.3) ── */
 @media (prefers-reduced-motion: reduce) {

@@ -13,9 +13,9 @@ Giancarlo Guevarra's personal site. Astro, static files, served by Cloudflare.
 
 | Path | What |
 |---|---|
-| `src/pages/` | The pages. `index.astro` is the blank page. |
+| `src/pages/` | The pages. `index.astro` is the front page: name, then the MD editor card. |
 | `src/layouts/Base.astro` | The shell every page shares: title, description, skip link, `<main>`. |
-| `src/styles/global.css` | Colour tokens and the accessibility baseline only. |
+| `src/styles/global.css` | Colour tokens, the accessibility baseline, and the front page's few layout rules. |
 | `src/config/site.js` | Name, email, links. |
 | `src/content/` | Typed entries: `writing`, `projects`, `roles`, `education`. Each has audience tags. |
 | `src/content.config.ts` | The schema for those entries. |
@@ -24,12 +24,13 @@ Giancarlo Guevarra's personal site. Astro, static files, served by Cloudflare.
 
 ## Accessibility baseline
 
-WCAG 2.2 Level AA throughout, AAA for colour contrast. The scheme is black with
-warm orange and yellow highlights, graham-cracker brown for secondary text, and a
-soft purple shadow accent (s'mores); the site is
-dark only. The tokens in `global.css` state their ratios; keep any new text
-colour at 7:1 or better on its paper, and never put orange and yellow on each
-other as text. Every page has a skip link, a visible focus ring, one `<h1>`,
+WCAG 2.2 Level AA throughout, AAA for colour contrast. The scheme is inspired by
+GMK Avanguardia (Gianni's choice, 2026-11-13): near-black navy paper, warm white
+text, lavender grey for secondary text, violet headings and links, magenta for
+emphasis and focus, an ice accent, and an indigo shadow that is decoration only.
+The site is dark only. The tokens in `global.css` state their ratios; keep any new
+text colour at 7:1 or better on its paper, and never put violet and magenta on
+each other as text. Every page has a skip link, a visible focus ring, one `<h1>`,
 and respects `prefers-reduced-motion`.
 
 ## Performance check
