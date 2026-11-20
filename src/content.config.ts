@@ -32,6 +32,8 @@ const projects = defineCollection({
     repo: z.string().url().optional(),
     url: z.string().url().optional(),     // where the live version can be used
     logo: z.string().optional(),          // path under public/, e.g. "/md-logo.svg"
+    tagline: z.string().optional(),       // one line shown under the link on the front page
+    tip: z.string().optional(),           // a short how-to shown under the tagline
     date: z.string().optional(),
     shown: z.boolean().default(false),
     audience,

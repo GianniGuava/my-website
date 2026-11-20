@@ -18,15 +18,19 @@ const [hostFirst, ...hostRest] = mdHost.split(".");
 
   <ul class="links" role="list">
     <li class="link-card">
-      <a class="link-main" href={md.data.url}>
-        {md.data.logo && (
-          <img class="link-logo" src={md.data.logo} alt="" width="48" height="48" />
+      <div class="link-row">
+        <a class="link-main" href={md.data.url}>
+          {md.data.logo && (
+            <img class="link-logo" src={md.data.logo} alt="" width="48" height="48" />
+          )}
+          <span>{hostFirst}{hostRest.map((part) => <Fragment><wbr />.{part}</Fragment>)}</span>
+        </a>
+        {md.data.repo && (
+          <a class="link-code" href={md.data.repo}>Code on GitHub</a>
         )}
-        <span>{hostFirst}{hostRest.map((part) => <Fragment><wbr />.{part}</Fragment>)}</span>
-      </a>
-      {md.data.repo && (
-        <a class="link-code" href={md.data.repo}>Code on GitHub</a>
-      )}
+      </div>
+      {md.data.tagline && <p class="link-tagline">{md.data.tagline}</p>}
+      {md.data.tip && <p class="link-tip">{md.data.tip}</p>}
     </li>
   </ul>
 </Base>
