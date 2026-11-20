@@ -49,6 +49,7 @@ h1, h2, h3 { color: var(--highlight-violet); }
   font-size: clamp(2rem, 6vw, 3rem);
   line-height: 1.15;
   margin: 2.5rem 0 2rem;
+  overflow-wrap: break-word;   /* with very large text, a long word wraps instead of leaving the screen */
 }
 
 .links {
@@ -139,6 +140,14 @@ h1, h2, h3 { color: var(--highlight-violet); }
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* ── Print: black on white, since browsers leave out the navy background ── */
+@media print {
+  html { background: #fff; color: #000; }
+  a, h1, h2, h3, .link-code, .link-tip { color: #000; }
+  .link-card { box-shadow: none; border-color: #000; }
+  .skip-link { display: none; }
 }
 
 /* ── Motion: nothing animates for people who asked for less (2.3.3) ── */

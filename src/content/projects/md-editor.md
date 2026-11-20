@@ -5,7 +5,7 @@ repo: "https://github.com/GianniGuava/md-editor"
 url: "https://md.giancarloguevarra.com"
 logo: "/md-logo.svg"
 tagline: "A Markdown editor that is mobile friendly and can work without internet!"
-tip: "On iPhone or iPad: open the editor in Safari, tap the Share button, then Add to Home Screen."
+tip: "On iPhone or iPad: open the editor in Safari, tap the Page Menu button (•••), then Share (or tap Share if it is on your toolbar), choose Add to Home Screen, then tap Add."
 date: "2026"
 shown: true
 audience: [engineering]
