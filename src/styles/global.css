@@ -1,28 +1,29 @@
 /* ═══════════════════════════════════════════════════════════
-   giancarloguevarra.com: the blank page.
+   giancarloguevarra.com
    This file holds the colour scheme and what accessibility needs.
-   The scheme is Gianni's: black, warm orange and yellow highlights,
-   a soft purple accent like a shadow. Every text colour clears
-   WCAG 2.2 AAA (7:1) on its paper.
+   The scheme is Gianni's choice (2026-11-13): a palette inspired by
+   GMK Avanguardia: near-black navy, violet, magenta, warm white.
+   Every text colour clears WCAG 2.2 AAA (7:1) on its paper.
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* Dark only: the design is black. Telling the browser so keeps form
+  /* Dark only: the design is navy. Telling the browser so keeps form
      controls and scrollbars matching. */
   color-scheme: dark;
 
-  /* Every ratio below is on --paper. Text colours clear WCAG 2.2 AAA (7:1).
-     Rule: orange and yellow never sit on each other as text (1.6:1). */
-  --paper:            #0a0a0a;   /* the black */
-  --ink:              #f3ece0;   /* warm white, 16.9:1: body text */
-  --ink-muted:        #c8a27a;   /* 8.4:1: graham-cracker brown for dates, captions, secondary text */
-  --highlight-orange: #ff8c42;   /* 8.6:1: headings, links, the warm highlight */
-  --highlight-yellow: #ffd166;   /* 13.7:1: the brighter highlight, emphasis */
-  --accent-purple:    #b8a9e0;   /* 9.2:1: the purple when it must be read as text */
-  --accent-shadow:    #6b5b95;   /* 3.4:1: shadows, glows, rules. Decorative only,
-                                    never the sole carrier of meaning */
-  --rule:             var(--accent-shadow);
-  --focus:            var(--highlight-yellow);
+  /* Every ratio below is on --paper (checked 2026-11-20). Text colours
+     clear WCAG 2.2 AAA (7:1).
+     Rule: violet and magenta never sit on each other as text (1.1:1). */
+  --paper:             #10131f;   /* near-black navy */
+  --ink:               #f7f2ea;   /* warm white, 16.6:1: body text */
+  --ink-muted:         #a9adc9;   /* 8.4:1: lavender grey for dates, captions, secondary text */
+  --highlight-violet:  #a493ff;   /* 7.2:1: headings, links */
+  --highlight-magenta: #ff7fbd;   /* 8.0:1: emphasis, focus */
+  --accent-ice:        #cfd6ff;   /* 13.0:1: the accent, sparingly */
+  --accent-shadow:     #2a2f5a;   /* 1.5:1: shadows, rules, card edges. Decorative only,
+                                     never the sole carrier of meaning */
+  --rule:              var(--accent-shadow);
+  --focus:             var(--highlight-magenta);
 
   --measure: 65ch;        /* comfortable line length for reading */
 }
@@ -38,9 +39,65 @@ html {
 body { margin: 0; }
 main { max-width: var(--measure); margin: 0 auto; padding: 1.5rem; }
 
-/* Links are orange and always underlined, so colour is never the only cue (1.4.1). */
-a { color: var(--highlight-orange); text-decoration: underline; text-underline-offset: 0.15em; }
-h1, h2, h3 { color: var(--highlight-orange); }
+/* Links are violet and always underlined, so colour is never the only cue (1.4.1). */
+a { color: var(--highlight-violet); text-decoration: underline; text-underline-offset: 0.15em; }
+h1, h2, h3 { color: var(--highlight-violet); }
+
+/* ── Front page links ──────────────────────────────────────── */
+h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.15;
+  margin: 2.5rem 0 2rem;
+}
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+/* One card per link: the main link with its logo, the code link beside it. */
+.link-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--accent-shadow);
+}
+
+.link-main {
+  flex: 1 1 auto;            /* take the row, so the address is not squeezed */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: clamp(1.05rem, 4vw, 1.2rem);
+  font-weight: 600;
+  overflow-wrap: break-word; /* last resort if one part of an address is too long */
+}
+
+.link-logo {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+/* The code link is secondary: muted, but still underlined like every link. */
+.link-code {
+  color: var(--ink-muted);
+  padding: 0.25rem 0;   /* keeps the target at least 24px tall (2.5.8) */
+}
+.link-code:hover { color: var(--accent-ice); }
+/* The underline sits on the address, not under the logo. */
+.link-main { text-decoration: none; }
+.link-main span { text-decoration: underline; text-underline-offset: 0.15em; }
+.link-main:hover span { text-decoration-thickness: 2px; }
 
 /* ── Keyboard focus, visible on every scheme (2.4.7, 2.4.11) ── */
 :focus-visible {

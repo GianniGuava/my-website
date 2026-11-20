@@ -1,8 +1,32 @@
 ---
-// The blank page. Gianni designs this one.
+// The front page: Gianni's name, then the things to look at.
+// Gianni designs this page; this is a tidy first pass (2026-11-20).
 import Base from "../layouts/Base.astro";
 import { site } from "../config/site.js";
+import { getEntry } from "astro:content";
+
+// First link: the MD editor. Its address, code link and logo live in
+// src/content/projects/md-editor.md, not here.
+const md = await getEntry("projects", "md-editor");
+if (!md?.data.url) throw new Error("projects/md-editor.md needs a url");
+const mdHost = new URL(md.data.url).host;
+// On narrow screens the address may wrap, but only before a dot.
+const [hostFirst, ...hostRest] = mdHost.split(".");
 ---
 <Base>
-  <h1>(Under construction!)</h1>
+  <h1>{site.name}</h1>
+
+  <ul class="links" role="list">
+    <li class="link-card">
+      <a class="link-main" href={md.data.url}>
+        {md.data.logo && (
+          <img class="link-logo" src={md.data.logo} alt="" width="48" height="48" />
+        )}
+        <span>{hostFirst}{hostRest.map((part) => <Fragment><wbr />.{part}</Fragment>)}</span>
+      </a>
+      {md.data.repo && (
+        <a class="link-code" href={md.data.repo}>Code on GitHub</a>
+      )}
+    </li>
+  </ul>
 </Base>

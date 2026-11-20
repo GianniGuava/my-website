@@ -30,6 +30,8 @@ const projects = defineCollection({
     summary: z.string(),
     role: z.string().optional(),
     repo: z.string().url().optional(),
+    url: z.string().url().optional(),     // where the live version can be used
+    logo: z.string().optional(),          // path under public/, e.g. "/md-logo.svg"
     date: z.string().optional(),
     shown: z.boolean().default(false),
     audience,
