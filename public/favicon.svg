@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- GG icon. Glyphs: EB Garamond Medium (SIL Open Font License 1.1, see tools/LICENSE-EB-Garamond.txt
-     in https://github.com/GianniGuava/my-website), converted to outlines by tools/build-icon.mjs. -->
+<!-- GG icon for giancarloguevarra.com. Glyphs: EB Garamond Medium (SIL Open Font License 1.1,
+     https://openfontlicense.org), converted to outlines. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="96" fill="#10131f"/>
   <rect x="14" y="14" width="484" height="484" rx="84" fill="none" stroke="#a493ff" stroke-width="28"/>

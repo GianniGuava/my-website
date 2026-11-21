@@ -20,6 +20,7 @@ Giancarlo Guevarra's personal site. Astro, static files, served by Cloudflare.
 | `src/content/` | Typed entries: `writing`, `projects`, `roles`, `education`. Each has audience tags. |
 | `src/content.config.ts` | The schema for those entries. |
 | `src/assets/` | Images processed at build time (the headshot lives here). |
+| `tools/build-icon.mjs` | Makes the GG browser and Home Screen icons in `public/` from EB Garamond and the colour tokens in `global.css`. Run `npm run build:icon` after changing either; the site build does not run it. |
 | `wrangler.jsonc` | Cloudflare settings. The Worker name must stay `my-website`. |
 
 ## Accessibility baseline

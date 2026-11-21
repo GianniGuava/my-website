@@ -23,10 +23,17 @@ const require = createRequire(import.meta.url);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(root, 'public');
 
-// Colours: the tokens in src/styles/global.css.
-const PAPER = '#10131f'; // navy
-const INK = '#f7f2ea';   // cream, 16.6:1 on PAPER
-const EDGE = '#a493ff';  // violet
+// Colours come from the tokens in src/styles/global.css, so the icon follows a palette
+// change the next time this script runs (it does not run on its own).
+const css = fs.readFileSync(path.join(root, 'src', 'styles', 'global.css'), 'utf8');
+const token = (name) => {
+  const m = css.match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})\\s*;`));
+  if (!m) throw new Error(`global.css has no --${name}: #rrggbb token`);
+  return m[1];
+};
+const PAPER = token('paper');            // navy
+const INK = token('ink');                // cream
+const EDGE = token('highlight-violet');  // violet
 
 const pkgDir = path.dirname(require.resolve('@fontsource/eb-garamond/package.json'));
 const fontFile = path.join(pkgDir, 'files', 'eb-garamond-latin-500-normal.woff');
@@ -46,8 +53,8 @@ const y = (SIZE - (box.y2 - box.y1)) / 2 - box.y1;
 const d = font.getPath(TEXT, x, y, FONT_SIZE, { kerning: true }).toPathData(2);
 
 const head = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- GG icon. Glyphs: EB Garamond Medium (SIL Open Font License 1.1, see tools/LICENSE-EB-Garamond.txt
-     in https://github.com/GianniGuava/my-website), converted to outlines by tools/build-icon.mjs. -->`;
+<!-- GG icon for giancarloguevarra.com. Glyphs: EB Garamond Medium (SIL Open Font License 1.1,
+     https://openfontlicense.org), converted to outlines. -->`;
 
 // Browser tab icon: rounded tile, violet edge inset so it is never cut by the curve.
 const favicon = `${head}
@@ -58,12 +65,15 @@ const favicon = `${head}
 </svg>
 `;
 
-// Home Screen icon: full square (iOS applies its own rounded mask). The edge sits 24 px in,
-// with corners rounded enough to stay inside that mask.
+// Home Screen icon: full square (iOS applies its own rounded mask). The edge sits 24 units in
+// (of 512; about 8 px in the 180 px PNG),
+// with corners rounded enough to stay inside that mask. The frame is smaller than the tab
+// tile's, so the letters are scaled to 82% about the centre to keep the same breathing room
+// (about 40 units between letters and frame).
 const touch = `<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">
   <rect width="${SIZE}" height="${SIZE}" fill="${PAPER}"/>
   <rect x="38" y="38" width="436" height="436" rx="78" fill="none" stroke="${EDGE}" stroke-width="28"/>
-  <path fill="${INK}" d="${d}"/>
+  <path fill="${INK}" transform="translate(256 256) scale(0.82) translate(-256 -256)" d="${d}"/>
 </svg>
 `;
 
